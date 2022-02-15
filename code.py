@@ -9,4 +9,6 @@ a = reg.coef_[0]; b = reg.intercept_
 
 print(a,b)
 
-print(a*2.9+b)
+Tension_mesuree = 2.9 # TODO
+
+print("Drag: {:.3f}N".format(a * Tension_mesuree + b))
