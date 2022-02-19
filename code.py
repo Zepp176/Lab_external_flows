@@ -22,7 +22,7 @@ plt.plot(Tension, Force, "or")
 
 Tension_mesuree = 2.94 #V
 Force_mesuree = a * Tension_mesuree + b
-print("Drag: {:.3f}N".format(Force_mesuree))
+print("Measured drag: {:.3f}N".format(Force_mesuree))
 
 plt.plot([Tension_mesuree], [Force_mesuree], 'xg', markersize=20)
 
@@ -88,5 +88,5 @@ for i, theta in enumerate(angles):
     F_drag += pressure_all[i]*np.cos(theta*np.pi/180)
 F_drag *= 2*0.5*0.025*(10*np.pi/180)
 
-print("Computed drag : {:.3f}N (vs {:.3f}N)".format(F_drag, Force_mesuree))
+print("Computed drag : {:.3f} N (vs {:.3f} N)".format(F_drag, Force_mesuree))
 
