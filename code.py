@@ -62,11 +62,12 @@ plt.plot(x, a*x**2 + b*x + c, '--')
 
 p_max = a*(-b/2/a)**2 + b*(-b/2/a) + c
 print("max dynamic pressure at alpha = {:.3f}° and p = {:.2f}Pa".format(-b/2/a, p_max))
-plt.plot([-b/2/a], [a*(-b/2/a)**2 + b*(-b/2/a) + c], 'xg', markersize=10)
 
 plt.plot([-10, -5, 0, 5, 10], pressure_front, 'o-')
 
-plt.legend(['parabolic interpolation', 'actual data'])
+plt.plot([-b/2/a], [a*(-b/2/a)**2 + b*(-b/2/a) + c], 'xg', markersize=10)
+
+plt.legend(['parabolic interpolation', 'measured pressure', 'maximum'])
 
 plt.savefig("fig3.png", dpi=300)
 
@@ -74,8 +75,18 @@ plt.savefig("fig3.png", dpi=300)
 
 rho = 1.225
 U_inf = np.sqrt(2*p_max/rho)
+Re = U_inf*0.05/15.6e-6
 
 print("Upstream velocity : {:.2f} m/s".format(U_inf))
+print("Re = {:.3f} x 10^4".format(Re/1e4))
 
-#%%
+#%% Computation of the drag coefficient
+
+F_drag = 0
+
+for i, theta in enumerate(angles):
+    F_drag += pressure_all[i]*np.cos(theta*np.pi/180)
+F_drag *= 2*0.5*0.025*(10*np.pi/180)
+
+print("Computed drag : {:.3f}N (vs {:.3f}N)".format(F_drag, Force_mesuree))
 
